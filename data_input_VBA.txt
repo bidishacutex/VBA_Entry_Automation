@@ -2,7 +2,7 @@ Option Explicit
 ' For income sheet
 Sub Reset()
 Dim i As Long 'for identify the last row
-i = [countA(2025!A:A)]
+i = [countA(income!A:A)]
 With Income
 '.TextBox1.Value = ""
 .TextBox2.Value = ""
@@ -20,9 +20,9 @@ End Sub
 Sub Submit()
 Dim sh As Worksheet
 Dim i As Long
-Set sh = ThisWorkbook.Sheets("2025")
+Set sh = ThisWorkbook.Sheets("income")
 sh.Select
-i = [countA(2025!A:A)] + 2
+i = [countA(income!A:A)] + 2
 With sh
 .Cells(i, 1) = Income.TextBox1.Value
 .Cells(i, 3) = Income.TextBox2.Value
