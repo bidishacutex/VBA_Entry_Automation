@@ -1,0 +1,66 @@
+Option Explicit
+' For income sheet
+Sub Reset()
+Dim i As Long 'for identify the last row
+i = [countA(2025!A:A)]
+With Income
+'.TextBox1.Value = ""
+.TextBox2.Value = ""
+.TextBox3.Value = ""
+.TextBox4.Value = ""
+.TextBox5.Value = ""
+.OptionButton1.Value = False
+.OptionButton2.Value = False
+.ComboBox1.Clear
+.ComboBox1.AddItem "Occupied"
+.ComboBox1.AddItem "Overlimit"
+.ComboBox1.AddItem "Complete"
+End With
+End Sub
+Sub Submit()
+Dim sh As Worksheet
+Dim i As Long
+Set sh = ThisWorkbook.Sheets("2025")
+sh.Select
+i = [countA(2025!A:A)] + 2
+With sh
+.Cells(i, 1) = Income.TextBox1.Value
+.Cells(i, 3) = Income.TextBox2.Value
+.Cells(i, 4) = Income.TextBox3.Value
+.Cells(i, 5) = Income.TextBox4.Value
+.Cells(i, 6) = Income.TextBox5.Value
+.Cells(i, 2) = IIf(Income.OptionButton1.Value = True, "Daily", "Hourly")
+.Cells(i, 7) = Cells(i, 6) - Cells(i, 5)
+.Cells(i, 8) = Income.ComboBox1.Value
+End With
+End Sub
+' For expense sheet
+Sub Reset1()
+Dim i As Long 'for identify the last row
+i = [countA(expense!A:A)]
+With Expense
+'.TextBox1.Value = ""
+.TextBox2.Value = ""
+.TextBox3.Value = ""
+.ComboBox1.Clear
+.ComboBox1.AddItem "Pending"
+.ComboBox1.AddItem "In-stock"
+.ComboBox1.AddItem "Complete"
+End With
+End Sub
+Sub Submit1()
+Dim sh As Worksheet
+Dim i As Long
+Set sh = ThisWorkbook.Sheets("expense")
+sh.Select
+i = [countA(expense!A:A)] + 2
+With sh
+.Cells(i, 1) = Expense.TextBox1.Value
+.Cells(i, 2) = Expense.TextBox2.Value
+.Cells(i, 3) = Expense.TextBox3.Value
+.Cells(i, 4) = Expense.ComboBox1.Value
+End With
+End Sub
+Sub show_form()
+Data1.Show
+End Sub

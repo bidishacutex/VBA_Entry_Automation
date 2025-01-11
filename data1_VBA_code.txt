@@ -1,0 +1,6 @@
+Private Sub CommandButton1_Click()
+    Income.Show
+End Sub
+Private Sub CommandButton2_Click()
+    Expense.Show
+End Sub

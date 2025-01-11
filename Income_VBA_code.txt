@@ -1,0 +1,68 @@
+Private Sub CommandButton1_Click()
+Call Reset
+End Sub
+Private Sub CommandButton2_Click()
+Call Submit
+Call Reset
+End Sub
+Private Sub UserForm_Initialize()
+Call Reset
+End Sub
+'date box
+Private Sub TextBox1_AfterUpdate()
+    On Error Resume Next ' Handle unexpected errors gracefully
+    
+    ' If the TextBox is empty or invalid, set to today's date
+    If TextBox1.Text = "" Or Not IsDate(TextBox1.Text) Then
+        MsgBox "Invalid date entered. Defaulting to today's date.", vbExclamation, "Invalid Input"
+        TextBox1.Text = Format(Date, "dd/mm/yyyy") ' Default to today's date
+    Else
+        ' Format the valid date to a specific format
+        TextBox1.Text = Format(TextBox1.Text, "dd/mm/yyyy")
+    End If
+    
+    On Error GoTo 0 ' Restore normal error handling
+End Sub
+'amount box
+Private Sub TextBox3_Change()
+    Dim enteredValue As String
+
+    On Error Resume Next ' Handle errors gracefully
+    enteredValue = TextBox3.Text
+
+    ' Check if the entered value is numeric; reset if not
+    If enteredValue <> "" Then
+        If Not IsNumeric(enteredValue) Then
+            TextBox3.Text = "" ' Clear invalid entry
+        End If
+    End If
+
+    On Error GoTo 0 ' Restore normal error handling
+End Sub
+'start time
+Private Sub TextBox4_AfterUpdate()
+    Dim enteredValue As String
+    enteredValue = TextBox4.Text
+
+    ' Validate if the entered value is a valid time
+    If IsDate(enteredValue) Then
+        ' If valid, format as HH:mm
+        TextBox4.Text = Format(TimeValue(enteredValue), "HH:mm")
+    Else
+        ' If invalid, clear the input
+        TextBox4.Text = ""
+    End If
+End Sub
+Private Sub TextBox5_AfterUpdate()
+    Dim enteredValue As String
+    enteredValue = TextBox5.Text
+
+    ' Validate if the entered value is a valid time
+    If IsDate(enteredValue) Then
+        ' If valid, format as HH:mm
+        TextBox5.Text = Format(TimeValue(enteredValue), "HH:mm")
+    Else
+        ' If invalid, clear the input
+        TextBox5.Text = ""
+    End If
+End Sub
